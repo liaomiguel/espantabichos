@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espantabichos — Control Sónico de Plagas</title>
     
-    <!-- Fuentes y Iconos -->
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Estilos del Proyecto -->
     <link rel="stylesheet" href="css/style.css">
@@ -20,18 +17,18 @@
     <header class="hero">
         <div class="status-badge" id="statusBadge">
             <span class="status-dot"></span>
-            <span id="statusText">SISTEMA APAGADO</span>
+            <span id="statusText">SISTEMA OFF-LINE</span>
         </div>
-        <h1>Control Sónico</h1>
-        <p>Solución acústica premium para la disuasión de plagas. Utiliza algoritmos de frecuencia variable para prevenir la habituación.</p>
+        <h1>Control <span>Sónico</span></h1>
+        <p>Arquitectura de disuasión acústica premium. Equipado con algoritmos de evasión de habituación por barrido de frecuencia ultra-preciso.</p>
     </header>
 
     <main class="dashboard">
         <!-- Panel de Objetivos -->
-        <section class="block">
+        <section class="block main-panel">
             <div class="block-header">
-                <span class="material-symbols-rounded">ads_click</span>
-                Objetivos de Protección
+                <span class="material-symbols-rounded" style="font-size: 16px;">ads_click</span>
+                Protective Targets
             </div>
             
             <div class="modes-container">
@@ -41,9 +38,9 @@
                     </div>
                     <div class="mode-text">
                         <h3>Roedores</h3>
-                        <p>Optimizado para ratas y ratones en áreas domésticas.</p>
+                        <p>Frecuencias cinéticas optimizadas para intrusión de ratas y ratones.</p>
                     </div>
-                    <div class="mode-freq">28 - 42 kHz</div>
+                    <div class="mode-freq">28.0 - 42.0 kHz</div>
                 </div>
 
                 <div class="mode-card" onclick="selectMode(1, this)">
@@ -52,9 +49,9 @@
                     </div>
                     <div class="mode-text">
                         <h3>Insectos</h3>
-                        <p>Frecuencias agresivas para hormigas y cucarachas.</p>
+                        <p>Emisiones agresivas dirigidas a coleópteros y hormigas.</p>
                     </div>
-                    <div class="mode-freq">15 - 30 kHz</div>
+                    <div class="mode-freq">15.0 - 30.0 kHz</div>
                 </div>
 
                 <div class="mode-card" onclick="selectMode(2, this)">
@@ -63,9 +60,9 @@
                     </div>
                     <div class="mode-text">
                         <h3>Voladores</h3>
-                        <p>Interferencias constantes para moscas y mosquitos.</p>
+                        <p>Interferencias de alta densidad para dípteros y mosquitos.</p>
                     </div>
-                    <div class="mode-freq">20 - 32 kHz</div>
+                    <div class="mode-freq">20.0 - 32.0 kHz</div>
                 </div>
 
                 <div class="mode-card" onclick="selectMode(3, this)">
@@ -73,31 +70,31 @@
                         <span class="material-symbols-rounded">all_inclusive</span>
                     </div>
                     <div class="mode-text">
-                        <h3>Barrido Total</h3>
-                        <p>Ciclos aleatorios que cubren todo el espectro disuasorio.</p>
+                        <h3>Full Sweep</h3>
+                        <p>Ciclo aleatorio de espectro completo (Omni-Protección).</p>
                     </div>
-                    <div class="mode-freq">12 - 45 kHz</div>
+                    <div class="mode-freq">12.0 - 45.0 kHz</div>
                 </div>
             </div>
 
             <div class="info-card">
-                <span class="material-symbols-rounded" style="font-size: 18px; vertical-align: middle; margin-right: 4px; color: var(--primary);">info</span>
-                <strong>Ciencia del Sonido:</strong> El éxito depende de la ubicación. Evite colocar el dispositivo detrás de muebles u objetos sólidos que absorban la energía acústica.
+                <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle; margin-right: 8px; color: var(--primary);">terminal</span>
+                <strong>Protocolo de Despliegue:</strong> La efectividad máxima se logra mediante líneas de visión despejadas. Evite barreras físicas sólidas que absorban la energía sonora.
             </div>
         </section>
 
         <!-- Monitor y Control -->
-        <section class="block monitor">
+        <section class="block side-panel monitor">
             <div class="block-header">
-                <span class="material-symbols-rounded">equalizer</span>
-                Monitor Maestro
+                <span class="material-symbols-rounded" style="font-size: 16px;">equalizer</span>
+                Signal Monitor
             </div>
 
             <div class="freq-display">
-                <div class="stat-label">Emisión en tiempo real</div>
+                <div class="stat-label">Real-Time Emission</div>
                 <div class="freq-number" id="freqNum">--</div>
                 <div class="freq-unit">kHz</div>
-                <div id="algTag" style="margin-top: 12px; font-size: 0.75rem; color: var(--text-dim); font-weight: 700; letter-spacing: 0.05em;">ESPERANDO CONFIGURACIÓN</div>
+                <div id="algTag" style="margin-top: 20px; font-size: 0.6rem; color: var(--text-dim); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;">AWAITING SELECTION</div>
             </div>
 
             <div class="visualizer" id="vizContainer">
@@ -106,24 +103,23 @@
 
             <div class="controls-group">
                 <div class="volume-bar">
-                    <span class="material-symbols-rounded" style="color: var(--text-dim)">volume_up</span>
+                    <span class="material-symbols-rounded" style="color: var(--primary); font-size: 18px;">volume_up</span>
                     <input type="range" min="0" max="100" value="70" id="volRange">
-                    <span id="volVal" style="font-size: 0.813rem; width: 35px; font-weight: 600;">70%</span>
+                    <span id="volVal" style="font-size: 0.75rem; width: 40px; font-weight: 600; color: var(--primary);">70%</span>
                 </div>
 
                 <button class="btn-action" id="mainButton" disabled>
-                    <span class="material-symbols-rounded">play_arrow</span>
                     INICIAR EMISIÓN
                 </button>
 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-label">Tiempo Activo</div>
+                        <div class="stat-label">Uptime</div>
                         <div class="stat-value" id="timeVal">00:00</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Eficiencia</div>
-                        <div class="stat-value" id="effVal">Normal</div>
+                        <div class="stat-label">Efficiency</div>
+                        <div class="stat-value" id="effVal">--</div>
                     </div>
                 </div>
             </div>
@@ -131,7 +127,8 @@
     </main>
 
     <footer>
-        &copy; 2026 Espantabichos &bull; Desarrollado por Liao Miguel &bull; <a href="https://liao.com.ar">liao.com.ar</a>
+        <div>&copy; 2026 Espantabichos — TRON CORE 1.0</div>
+        <div>Desarrollado por <a href="https://liao.com.ar">Liao Miguel</a></div>
     </footer>
 </div>
 

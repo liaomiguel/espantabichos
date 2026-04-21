@@ -8,10 +8,10 @@ let startTime = 0;
 let animId = null;
 
 const definitions = [
-    { min: 18000, max: 22000, name: 'Roedores' },
-    { min: 14000, max: 19000, name: 'Insectos' },
-    { min: 19000, max: 21000, name: 'Voladores' },
-    { min: 12000, max: 22000, name: 'Total' }
+    { min: 18000, max: 22000, name: 'Rodent Protocol' },
+    { min: 14000, max: 19000, name: 'Insect Protocol' },
+    { min: 19000, max: 21000, name: 'Aviation Protocol' },
+    { min: 12000, max: 22000, name: 'Omni-Sweep' }
 ];
 
 // Build visualizer bars
@@ -57,11 +57,11 @@ function startEngine() {
     startTime = Date.now();
     
     // UI Updates
-    mainBtn.innerHTML = '<span class="material-symbols-rounded">stop</span> DETENER EMISIÓN';
+    mainBtn.innerHTML = 'STOP EMISSION';
     mainBtn.classList.add('active');
     document.getElementById('statusBadge').classList.add('active');
-    document.getElementById('statusText').textContent = 'EMITIENDO SEÑAL';
-    document.getElementById('effVal').textContent = 'Óptima';
+    document.getElementById('statusText').textContent = 'ACTIVE EMISSION';
+    document.getElementById('effVal').textContent = 'OPTIMAL';
     
     requestAnimationFrame(loop);
 }
@@ -75,12 +75,12 @@ function stopEngine() {
     if(audioContext) audioContext.close();
     
     running = false;
-    mainBtn.innerHTML = '<span class="material-symbols-rounded">play_arrow</span> INICIAR EMISIÓN';
+    mainBtn.innerHTML = 'START EMISSION';
     mainBtn.classList.remove('active');
     document.getElementById('statusBadge').classList.remove('active');
-    document.getElementById('statusText').textContent = 'SISTEMA APAGADO';
+    document.getElementById('statusText').textContent = 'OFF-LINE';
     document.getElementById('freqNum').textContent = (currentModeObj.min / 1000).toFixed(1);
-    document.getElementById('effVal').textContent = 'Normal';
+    document.getElementById('effVal').textContent = 'STBY';
     
     // Reset bars
     document.querySelectorAll('.viz-bar').forEach(b => {

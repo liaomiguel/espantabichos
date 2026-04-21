@@ -84,16 +84,6 @@ body::before {
     padding-left: 32px;
 }
 
-.logo-wrap {
-    margin-bottom: 20px;
-}
-
-.main-logo {
-    width: 60px;
-    height: 60px;
-    filter: drop-shadow(0 0 10px var(--primary-glow));
-}
-
 @media (max-width: 768px) {
     .hero {
         padding-left: 20px;

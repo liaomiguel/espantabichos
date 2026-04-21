@@ -133,6 +133,7 @@ function loop() {
 // initialization
 document.addEventListener('DOMContentLoaded', () => {
     buildVisualizer();
+    initTunnel();
 
     const mainBtn = document.getElementById('mainButton');
     const volRange = document.getElementById('volRange');
@@ -153,3 +154,75 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
+
+// --- Futuristic Tunnel Background ---
+function initTunnel() {
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    let width, height, centerX, centerY;
+    let frames = [];
+    const frameCount = 15;
+    const speedBase = 0.015;
+    let speed = speedBase;
+
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        centerX = width / 2;
+        centerY = height / 2;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Create initial frames at different depths
+    for (let i = 0; i < frameCount; i++) {
+        frames.push({ z: (i / frameCount) });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        
+        // Dynamic speed based on app state
+        const targetSpeed = running ? 0.05 : speedBase;
+        speed += (targetSpeed - speed) * 0.05;
+
+        ctx.strokeStyle = '#00d4ff';
+        ctx.lineWidth = 1;
+
+        frames.forEach(frame => {
+            frame.z -= speed;
+            if (frame.z <= 0) frame.z = 1;
+
+            const size = 1 / frame.z;
+            const w = 400 * size;
+            const h = 400 * size;
+            const x = centerX - w / 2;
+            const y = centerY - h / 2;
+
+            // Draw rect frame
+            ctx.globalAlpha = Math.min(1, (1 - frame.z) * 0.8);
+            ctx.strokeRect(x, y, w, h);
+
+            // Draw lines to corners (perspective)
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x, y);
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x + w, y);
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x, y + h);
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x + w, y + h);
+            ctx.stroke();
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+}

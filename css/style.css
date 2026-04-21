@@ -27,6 +27,7 @@ body {
     line-height: 1.5;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    position: relative;
     
     /* Grid Pattern */
     background-image: 
@@ -34,6 +35,17 @@ body {
         linear-gradient(var(--text-dim) 0.5px, transparent 0.5px),
         linear-gradient(90deg, var(--text-dim) 0.5px, transparent 0.5px);
     background-size: 100% 100%, var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    opacity: 0.15;
+    pointer-events: none;
 }
 
 /* Background Ornament: Dots */

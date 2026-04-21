@@ -3,7 +3,11 @@
   "name": "Espantabichos — Control Sónico",
   "short_name": "Espantabichos",
   "description": "Disuasión acústica avanzada de grado premium mediante frecuencias variables.",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["utilities", "lifestyle"],
   "start_url": "index.html",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#050a0f",
   "theme_color": "#00f2ff",
@@ -28,28 +32,27 @@
       "sizes": "375x832",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Interfaz Principal de Control"
+      "label": "Interfaz Principal"
     },
     {
-      "src": "assets/screenshot-2.png",
-      "sizes": "375x832",
+      "src": "assets/screenshot-desktop.png",
+      "sizes": "1920x919",
       "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Configuración de Frecuencias"
+      "form_factor": "wide",
+      "label": "Panel de Control Master"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Modo Roedores",
+      "url": "index.html?mode=0",
+      "description": "Protección inmediata contra ratas y ratones",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
     },
     {
-      "src": "assets/screenshot-3.png",
-      "sizes": "375x832",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Monitor de Ondas en Vivo"
-    },
-    {
-      "src": "assets/screenshot-4.png",
-      "sizes": "375x832",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Protección Específica"
+      "name": "Modo Insectos",
+      "url": "index.html?mode=1",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

@@ -44,7 +44,7 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: -2;
-    opacity: 0.15;
+    opacity: 0.3;
     pointer-events: none;
 }
 
@@ -71,8 +71,8 @@ body::before {
 
 @media (max-width: 768px) {
     .layout {
-        padding: 40px 20px;
-        gap: 40px;
+        padding: 20px 15px;
+        gap: 20px;
     }
 }
 
@@ -98,9 +98,11 @@ body::before {
 
 @media (max-width: 768px) {
     .hero {
-        padding-left: 20px;
+        padding-left: 15px;
+        gap: 5px;
         border-left-width: 2px;
     }
+    .status-badge { font-size: 0.6rem; margin-bottom: -5px; }
 }
 
 .status-badge {
@@ -149,9 +151,14 @@ body::before {
 
 .hero p {
     color: var(--text-muted);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     max-width: 600px;
     font-weight: 300;
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .hero p { display: none; }
 }
 
 /* Bento Dashboard */
@@ -178,8 +185,8 @@ body::before {
 
 @media (max-width: 768px) {
     .block {
-        padding: 24px;
-        gap: 24px;
+        padding: 20px;
+        gap: 20px;
     }
 }
 
@@ -198,6 +205,10 @@ body::before {
     opacity: 0.8;
 }
 
+@media (max-width: 768px) {
+    .block-header { display: none; }
+}
+
 /* Mode Grid - Bento style within blocks */
 .modes-container {
     display: grid;
@@ -207,7 +218,8 @@ body::before {
 
 @media (max-width: 640px) {
     .modes-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
 }
 
@@ -268,10 +280,34 @@ body::before {
 }
 
 .mode-freq {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 800;
     color: var(--primary);
-    margin-top: 20px;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .mode-card { 
+        padding: 12px; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center;
+        justify-content: center;
+        min-height: 100px;
+    }
+    .mode-card .icon-wrap { 
+        margin-bottom: 5px; 
+        width: 24px; 
+        height: 24px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .mode-card .icon-wrap span { font-size: 20px; }
+    .mode-text h3 { font-size: 0.75rem; margin-bottom: 2px; }
+    .mode-text p { display: none; }
+    .mode-freq { margin-top: 5px; font-size: 0.55rem; opacity: 0.7; }
 }
 
 /* Monitor Display */
@@ -281,10 +317,15 @@ body::before {
 
 .freq-display {
     position: relative;
-    padding: 40px;
+    padding: 30px 40px;
     background: radial-gradient(circle at center, rgba(0, 212, 255, 0.08), transparent);
     border: 1px solid var(--border);
-    margin-bottom: 24px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .freq-display { padding: 20px; margin-bottom: 10px; }
+    .freq-number { font-size: 3.5rem; }
 }
 
 .freq-number {
@@ -322,6 +363,10 @@ body::before {
     padding: 0 10px;
 }
 
+@media (max-width: 768px) {
+    .visualizer { display: none; }
+}
+
 .viz-bar {
     flex: 1;
     background: var(--primary);
@@ -334,6 +379,10 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .controls-group { gap: 15px; }
 }
 
 .volume-bar {
@@ -373,6 +422,10 @@ input[type=range]::-webkit-slider-thumb {
     transition: all 0.3s;
 }
 
+@media (max-width: 768px) {
+    .btn-action { padding: 18px; font-size: 0.8rem; }
+}
+
 .btn-action:hover:not(:disabled) {
     background: var(--primary);
     color: #000;
@@ -406,6 +459,10 @@ input[type=range]::-webkit-slider-thumb {
     font-weight: 300;
 }
 
+@media (max-width: 768px) {
+    .info-card { display: none; }
+}
+
 .info-card strong {
     color: var(--primary);
     font-weight: 600;
@@ -428,18 +485,23 @@ input[type=range]::-webkit-slider-thumb {
     padding: 20px;
 }
 
+@media (max-width: 768px) {
+    .stat-card { padding: 10px; }
+    .stat-value { font-size: 1rem; }
+}
+
 .stat-label { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 8px; }
 .stat-value { font-size: 1.2rem; font-weight: 300; color: var(--text-main); }
 
 footer {
     border-top: 1px solid var(--border);
-    padding-top: 40px;
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     color: var(--text-dim);
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }

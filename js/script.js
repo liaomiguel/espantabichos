@@ -133,7 +133,7 @@ function loop() {
 // initialization
 document.addEventListener('DOMContentLoaded', () => {
     buildVisualizer();
-    initTunnel();
+    initSoundWaves();
 
     const mainBtn = document.getElementById('mainButton');
     const volRange = document.getElementById('volRange');
@@ -155,17 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- Futuristic Tunnel Background ---
-function initTunnel() {
+// --- Ultrasonic Wave Background ---
+function initSoundWaves() {
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     
     let width, height, centerX, centerY;
-    let frames = [];
-    const frameCount = 15;
-    const speedBase = 0.015;
-    let speed = speedBase;
+    let waves = [];
+    const maxWaves = 12;
+    let time = 0;
 
     function resize() {
         width = window.innerWidth;
@@ -179,48 +178,110 @@ function initTunnel() {
     window.addEventListener('resize', resize);
     resize();
 
-    // Create initial frames at different depths
-    for (let i = 0; i < frameCount; i++) {
-        frames.push({ z: (i / frameCount) });
+    // Create initial wave objects
+    for (let i = 0; i < maxWaves; i++) {
+        waves.push({
+            radius: (i / maxWaves) * Math.max(width, height) * 0.7,
+            opacity: 1 - (i / maxWaves),
+            speed: 1.5 + Math.random()
+        });
     }
 
     function draw() {
-        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(5, 10, 15, 0.2)'; 
+        ctx.fillRect(0, 0, width, height);
         
-        // Dynamic speed based on app state
-        const targetSpeed = running ? 0.05 : speedBase;
-        speed += (targetSpeed - speed) * 0.05;
+        time += running ? 0.04 : 0.015;
+        
+        const primaryColor = '#00f2ff';
+        const secondaryColor = '#7000ff';
 
-        ctx.strokeStyle = '#00d4ff';
-        ctx.lineWidth = 1;
+        // Background Grid (Technical look)
+        ctx.strokeStyle = 'rgba(0, 242, 255, 0.04)';
+        ctx.lineWidth = 0.5;
+        const gridSize = 60;
+        for(let x = 0; x < width; x += gridSize) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+        }
+        for(let y = 0; y < height; y += gridSize) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+        }
 
-        frames.forEach(frame => {
-            frame.z -= speed;
-            if (frame.z <= 0) frame.z = 1;
+        waves.forEach((wave, i) => {
+            const currentSpeed = running ? wave.speed * 3 : wave.speed;
+            wave.radius += currentSpeed;
+            
+            const maxRadius = Math.max(width, height) * 0.8;
+            if (wave.radius > maxRadius) {
+                wave.radius = 0;
+            }
 
-            const size = 1 / frame.z;
-            const w = 400 * size;
-            const h = 400 * size;
-            const x = centerX - w / 2;
-            const y = centerY - h / 2;
-
-            // Draw rect frame
-            ctx.globalAlpha = Math.min(1, (1 - frame.z) * 0.8);
-            ctx.strokeRect(x, y, w, h);
-
-            // Draw lines to corners (perspective)
+            const alpha = (1 - (wave.radius / maxRadius)) * 0.5;
+            
+            // Draw Main Circle
             ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(x, y);
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(x + w, y);
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(x, y + h);
-            ctx.moveTo(centerX, centerY);
-            ctx.lineTo(x + w, y + h);
+            ctx.arc(centerX, centerY, wave.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = running ? primaryColor : 'rgba(0, 242, 255, 0.4)';
+            ctx.globalAlpha = alpha;
+            ctx.lineWidth = running ? 2 : 1;
             ctx.stroke();
+
+            // Data markers on the wave
+            if (i % 4 === 0 && wave.radius > 50) {
+                ctx.font = '700 8px Geist';
+                ctx.fillStyle = primaryColor;
+                ctx.fillText(`${(wave.radius/10).toFixed(1)}kHz`, centerX + wave.radius + 5, centerY);
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX + wave.radius, centerY);
+                ctx.lineTo(centerX + wave.radius + 15, centerY);
+                ctx.stroke();
+            }
+
+            // High-frequency interference (for active state)
+            if (running) {
+                ctx.beginPath();
+                const segments = 120;
+                for(let s = 0; s <= segments; s++) {
+                    const angle = (s / segments) * Math.PI * 2;
+                    const noise = Math.sin(angle * 20 + time * 10) * 3;
+                    const r = wave.radius + noise;
+                    const px = centerX + Math.cos(angle) * r;
+                    const py = centerY + Math.sin(angle) * r;
+                    if(s === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.strokeStyle = secondaryColor;
+                ctx.lineWidth = 0.5;
+                ctx.globalAlpha = alpha * 0.3;
+                ctx.stroke();
+            }
         });
 
+        // Ultrasonic Scanning Sweep (Radar style)
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(time);
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(width, height));
+        grad.addColorStop(0, 'rgba(0, 242, 255, 0)');
+        grad.addColorStop(0.5, 'rgba(0, 242, 255, 0.05)');
+        grad.addColorStop(1, 'rgba(0, 242, 255, 0.1)');
+        
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, Math.max(width, height), 0, Math.PI / 8);
+        ctx.closePath();
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.restore();
+
+        // Horizontal Scanline
+        const scanY = (Math.sin(time * 0.3) * 0.5 + 0.5) * height;
+        ctx.globalAlpha = 0.05;
+        ctx.fillStyle = primaryColor;
+        ctx.fillRect(0, scanY, width, 1);
+        
+        ctx.globalAlpha = 1;
         requestAnimationFrame(draw);
     }
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad — Espantabichos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .privacy-content {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            background: rgba(10, 15, 25, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            line-height: 1.6;
+            color: var(--text-dim);
+        }
+        h1, h2 { color: var(--primary); }
+        h1 { margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        h2 { margin-top: 30px; font-size: 1.2rem; }
+        p { margin-bottom: 15px; }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="layout">
+        <div class="privacy-content">
+            <a href="index.html" class="back-link">← VOLVER AL PANEL</a>
+            <h1>Política de Privacidad</h1>
+            <p>Última actualización: 21 de abril de 2026</p>
+
+            <h2>1. Información General</h2>
+            <p>Espantabichos ("la Aplicación") es una herramienta de disuasión acústica diseñada para uso personal. Respetamos su privacidad y estamos comprometidos con la protección de cualquier información que pueda ser procesada a través de la aplicación.</p>
+
+            <h2>2. Recopilación de Datos</h2>
+            <p><strong>La Aplicación NO recopila, almacena ni transmite ningún tipo de información personal, datos de geolocalización o identificadores de dispositivo.</strong> Todas las operaciones se realizan localmente en el dispositivo del usuario.</p>
+
+            <h2>3. Uso de la Web Audio API</h2>
+            <p>La aplicación utiliza la API de Audio de su navegador para generar frecuencias de sonido en tiempo real. Esta funcionalidad no accede al micrófono de su dispositivo ni graba ningún tipo de audio ambiental.</p>
+
+            <h2>4. Cookies y Almacenamiento Local</h2>
+            <p>Podemos utilizar el almacenamiento local (LocalStorage) exclusivamente para recordar sus preferencias de configuración (como el modo seleccionado o el nivel de volumen) con el fin de mejorar su experiencia de usuario. Estos datos no se comparten con terceros.</p>
+
+            <h2>5. Enlaces a Terceros</h2>
+            <p>La aplicación puede contener enlaces a sitios web externos (como liao.com.ar). No somos responsables de las prácticas de privacidad de dichos sitios.</p>
+
+            <h2>6. Cambios en esta Política</h2>
+            <p>Nos reservamos el derecho de actualizar esta política en cualquier momento. Se recomienda revisar esta página periódicamente para estar al tanto de cualquier cambio.</p>
+
+            <h2>7. Contacto</h2>
+            <p>Si tiene preguntas sobre esta política, puede contactarnos a través de nuestro sitio web profesional.</p>
+        </div>
+    </div>
+
+    <!-- Script para mantener el fondo animado coherente -->
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function draw() {
+            ctx.fillStyle = 'rgba(5, 10, 15, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Simulación simple de estática/ruido para el fondo
+            for(let i=0; i<100; i++) {
+                ctx.fillStyle = `rgba(0, 242, 255, ${Math.random() * 0.05})`;
+                ctx.fillRect(Math.random() * canvas.width, Math.random() * canvas.height, 1, 1);
+            }
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>

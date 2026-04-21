@@ -10,6 +10,11 @@
     
     <!-- Estilos del Proyecto -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#00f2ff">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
 </head>
 <body>
 
@@ -136,6 +141,16 @@
 
 <!-- Lógica del Proyecto -->
 <script src="js/script.js"></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('SW registrado', reg))
+                .catch(err => console.error('Error al registrar SW', err));
+        });
+    }
+</script>
 
 </body>
 </html>

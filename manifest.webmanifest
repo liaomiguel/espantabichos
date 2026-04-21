@@ -1,0 +1,24 @@
+{
+  "name": "Espantabichos — Control Sónico",
+  "short_name": "Espantabichos",
+  "description": "Disuasión acústica avanzada de grado premium mediante frecuencias variables.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#050a0f",
+  "theme_color": "#00f2ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

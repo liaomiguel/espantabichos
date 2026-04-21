@@ -1,4 +1,5 @@
 {
+  "id": "espantabichos-pwa-v1",
   "name": "Espantabichos — Control Sónico",
   "short_name": "Espantabichos",
   "description": "Disuasión acústica avanzada de grado premium mediante frecuencias variables.",
@@ -19,6 +20,36 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshot-1.png",
+      "sizes": "375x832",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Interfaz Principal de Control"
+    },
+    {
+      "src": "assets/screenshot-2.png",
+      "sizes": "375x832",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Configuración de Frecuencias"
+    },
+    {
+      "src": "assets/screenshot-3.png",
+      "sizes": "375x832",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Monitor de Ondas en Vivo"
+    },
+    {
+      "src": "assets/screenshot-4.png",
+      "sizes": "375x832",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Protección Específica"
     }
   ]
 }

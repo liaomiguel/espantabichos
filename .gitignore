@@ -1,0 +1,21 @@
+# Espantabichos Git Ignore
+
+# Carpeta local (solicitada)
+local/
+
+# Dependencias (si usas npm más adelante)
+node_modules/
+npm-debug.log*
+
+# Archivos de Sistema
+.DS_Store
+Thumbs.db
+.vscode/
+
+# PWA y temporales
+.cache/
+dist/
+
+# Archivos de entorno
+.env
+.env.local
